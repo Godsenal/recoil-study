@@ -6,7 +6,6 @@ import {
   IconButton,
   Input,
   Spacer,
-  Text,
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
@@ -60,17 +59,15 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
   return (
     <HStack>
       <Checkbox
-        defaultChecked={isCompleted}
-        onChange={(e) => handleComplete(e.target.checked)}
-      />
-      <Text
         {...(isCompleted && {
           textDecoration: "line-through",
           color: "gray.400",
         })}
+        defaultChecked={isCompleted}
+        onChange={(e) => handleComplete(e.target.checked)}
       >
         {text}
-      </Text>
+      </Checkbox>
       <Spacer />
       <ButtonGroup>
         <IconButton
