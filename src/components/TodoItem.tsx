@@ -1,4 +1,4 @@
-import { EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   ButtonGroup,
   HStack,
@@ -27,6 +27,15 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
     setIsEdit(false);
   };
 
+  const handleDelete = () => {
+    setTodoListState(
+      produce((draft: TTodo[]) => {
+        const index = draft.findIndex((t) => t.id === id);
+        index !== -1 && draft.splice(index, 1);
+      })
+    );
+  };
+
   if (isEdit) {
     return (
       <form
@@ -49,6 +58,11 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
           aria-label="edit"
           icon={<EditIcon />}
           onClick={() => setIsEdit(true)}
+        />
+        <IconButton
+          aria-label="delete"
+          icon={<DeleteIcon />}
+          onClick={handleDelete}
         />
       </ButtonGroup>
     </HStack>
