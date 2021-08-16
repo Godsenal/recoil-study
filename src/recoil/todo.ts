@@ -6,10 +6,10 @@ export type TTodo = {
   isCompleted: boolean;
 };
 
-export enum TodoFilter {
-  All,
-  Completed,
-  Uncompleted,
+export enum TodoFilterType {
+  All = "All",
+  Completed = "Completed",
+  Uncompleted = "Uncompleted",
 }
 
 export const todoListState = atom<TTodo[]>({
@@ -17,9 +17,9 @@ export const todoListState = atom<TTodo[]>({
   default: [],
 });
 
-export const todoListFilterState = atom<TodoFilter>({
+export const todoListFilterState = atom<TodoFilterType>({
   key: "todoListFilterState",
-  default: TodoFilter.All,
+  default: TodoFilterType.All,
 });
 
 export const filteredTodoListState = selector({
@@ -29,9 +29,9 @@ export const filteredTodoListState = selector({
     const list = get(todoListState);
 
     switch (filter) {
-      case TodoFilter.Completed:
+      case TodoFilterType.Completed:
         return list.filter((item) => item.isCompleted);
-      case TodoFilter.Uncompleted:
+      case TodoFilterType.Uncompleted:
         return list.filter((item) => !item.isCompleted);
       default:
         return list;
