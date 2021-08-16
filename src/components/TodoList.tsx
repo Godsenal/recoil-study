@@ -1,6 +1,7 @@
-import { Box, Center } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { todoListState } from "src/recoil/todo";
+import TodoItem from "./TodoItem";
 
 const TodoList = () => {
   const [todoList] = useRecoilState(todoListState);
@@ -12,7 +13,7 @@ const TodoList = () => {
   return (
     <>
       {todoList.map((todo) => (
-        <Box key={todo.id}>{todo.text}</Box>
+        <TodoItem key={todo.id} {...todo} />
       ))}
     </>
   );

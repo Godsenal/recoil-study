@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-type TTodo = {
+export type TTodo = {
   id: string;
   text: string;
   isCompleted: boolean;
