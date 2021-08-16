@@ -1,6 +1,7 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   ButtonGroup,
+  Checkbox,
   HStack,
   IconButton,
   Input,
@@ -17,22 +18,29 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
   const [editText, setEditText] = useState(text);
   const [isEdit, setIsEdit] = useState(false);
 
+  const findAndUpdate = (cb: (draft: TTodo[], index: number) => void) => {
+    return produce((draft: TTodo[]) => {
+      const index = draft.findIndex((t) => t.id === id);
+      index !== -1 && cb(draft, index);
+    });
+  };
+
   const handleEdit = () => {
     setTodoListState(
-      produce((draft: TTodo[]) => {
-        const index = draft.findIndex((t) => t.id === id);
-        index !== -1 && (draft[index].text = editText);
-      })
+      findAndUpdate((draft, index) => (draft[index].text = editText))
     );
     setIsEdit(false);
   };
 
   const handleDelete = () => {
+    setTodoListState(findAndUpdate((draft, index) => draft.splice(index, 1)));
+  };
+
+  const handleComplete = (nextCompleted: boolean) => {
     setTodoListState(
-      produce((draft: TTodo[]) => {
-        const index = draft.findIndex((t) => t.id === id);
-        index !== -1 && draft.splice(index, 1);
-      })
+      findAndUpdate(
+        (draft, index) => (draft[index].isCompleted = nextCompleted)
+      )
     );
   };
 
@@ -51,7 +59,18 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
 
   return (
     <HStack>
-      <Text>{text}</Text>
+      <Checkbox
+        defaultChecked={isCompleted}
+        onChange={(e) => handleComplete(e.target.checked)}
+      />
+      <Text
+        {...(isCompleted && {
+          textDecoration: "line-through",
+          color: "gray.400",
+        })}
+      >
+        {text}
+      </Text>
       <Spacer />
       <ButtonGroup>
         <IconButton
