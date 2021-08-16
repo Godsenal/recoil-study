@@ -59,6 +59,7 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
   return (
     <HStack>
       <Checkbox
+        flex={1}
         {...(isCompleted && {
           textDecoration: "line-through",
           color: "gray.400",
@@ -68,7 +69,6 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
       >
         {text}
       </Checkbox>
-      <Spacer />
       <ButtonGroup>
         <IconButton
           aria-label="edit"
