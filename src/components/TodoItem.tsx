@@ -5,7 +5,6 @@ import {
   HStack,
   IconButton,
   Input,
-  Spacer,
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
