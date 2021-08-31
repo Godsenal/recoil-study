@@ -30,7 +30,8 @@
     "test:watch": "jest --watch",
     "preCommit": "tsc --noEmit && lint-staged",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepare-deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll"
   },
   "eslintConfig": {
     "extends": [
