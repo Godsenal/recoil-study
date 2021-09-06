@@ -11,7 +11,6 @@ const RadioCard = ({
   onChange,
   children,
 }: PropsWithChildren<TProps>) => {
-  console.log(isChecked);
   return (
     <Box as="label">
       <Box
