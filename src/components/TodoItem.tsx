@@ -63,7 +63,7 @@ const TodoItem = ({ id, isCompleted, text }: TTodo) => {
           textDecoration: "line-through",
           color: "gray.400",
         })}
-        defaultChecked={isCompleted}
+        isChecked={isCompleted}
         onChange={(e) => handleComplete(e.target.checked)}
       >
         {text}

@@ -1,17 +1,20 @@
-import { Box, useRadio, UseRadioProps } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 
-const RadioCard = (props: PropsWithChildren<UseRadioProps>) => {
-  const { getInputProps, getCheckboxProps } = useRadio(props);
+type TProps = {
+  isChecked: boolean;
+  onChange: () => void;
+};
 
-  const input = getInputProps();
-  const checkbox = getCheckboxProps();
-
+const RadioCard = ({
+  isChecked,
+  onChange,
+  children,
+}: PropsWithChildren<TProps>) => {
+  console.log(isChecked);
   return (
     <Box as="label">
-      <input {...input} />
       <Box
-        {...checkbox}
         cursor="pointer"
         borderWidth="1px"
         borderRadius="md"
@@ -26,8 +29,10 @@ const RadioCard = (props: PropsWithChildren<UseRadioProps>) => {
         }}
         py={1}
         px={2}
+        onClick={() => onChange()}
+        {...(isChecked && { "data-checked": true })}
       >
-        {props.children}
+        {children}
       </Box>
     </Box>
   );
