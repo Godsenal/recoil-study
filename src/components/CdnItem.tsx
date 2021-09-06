@@ -36,6 +36,7 @@ const CdnItem = ({ cdn, onClickKeyword }: TProps) => {
         <Box>
           {cdn.keywords.map((keyword) => (
             <Tag
+              key={keyword}
               mr={2}
               mt={2}
               cursor="pointer"
